@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, Button } from '@material-ui/core';
+import {createEmployee, modifyEmployee} from './../../../../services/employees';
 
 class AddForm extends Component{
     constructor(props){
@@ -7,18 +8,25 @@ class AddForm extends Component{
         const defaultData={id: null, name: null, last_name: null, email: null, phone: null}
         this.state={
             data: (props.data || defaultData),
-            oldData: (props.oldData || defaultData)
         }
     }
 
-    componentDidMount(){
+    handleSubmit=()=>{
+        const data=this.state.data;
+        if(data.id){
+            modifyEmployee(data).then(()=>{
+                this.props.handleCancel();
+            }, (e) => console.error(e))
+        }else{
+            createEmployee(data).then(()=>{
+                this.props.handleCancel();
+            }, (e) => console.error(e))
+        }
     }
 
     handleChange=(event)=>{
         const val = event.target.value
         let data=this.state.data;
-        console.log(data)
-        console.log(this.state.oldData)
         data[event.target.name]=val;
         this.setState({ data });
     }
@@ -26,8 +34,8 @@ class AddForm extends Component{
     render(){
         const {data}=this.state;
         return(
-            <Grid container>
-                <Grid item xs={6}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
                     <TextField 
                         name="name" 
                         label="Nombre"
@@ -36,8 +44,38 @@ class AddForm extends Component{
                         onChange={this.handleChange}
                     />
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        name="last_name" 
+                        label="Apellido"
+                        value={data.last_name}
+                        fullWidth
+                        onChange={this.handleChange}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        name="email" 
+                        label="Correo"
+                        value={data.email}
+                        fullWidth
+                        onChange={this.handleChange}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        name="phone" 
+                        label="Teléfono"
+                        value={data.phone}
+                        fullWidth
+                        onChange={this.handleChange}
+                    />
+                </Grid>
                 <Grid item xs={6}>
-                    qwe
+                    <Button color="secondary" onClick={this.props.handleCancel}>Cancelar</Button>
+                </Grid>
+                <Grid item xs={6}>
+                    <Button color="primary" onClick={this.handleSubmit}>{data.id ? "modificar" : "crear"} empleado</Button>
                 </Grid>
             </Grid>
         );

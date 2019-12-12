@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Grid, Button } from '@material-ui/core';
 import Table from '../../Table';
-import {employees} from './../../../services/employees'
+import {employees, getEmployees, deleteEmployee} from './../../../services/employees'
 import AddForm from './AddForm';
 import Dialog from '../../Dialog';
 import AddIcon from '@material-ui/icons/Add';
@@ -32,28 +32,40 @@ class Employees extends Component{
         }
     }
 
-    addForm=<AddForm/>;
+    addForm=<AddForm handleCancel={this.setOpenFalse}/>;
+
+    async getData() {
+        getEmployees().then(({ employees }) => {
+            this.setState({data: employees})
+        })
+    }
+
+    deleteEmployee=(data)=>{
+        deleteEmployee(data).then(()=>{
+            this.getData();
+        }, (e) => console.error(e))
+    }
 
     openEditDialog=(data, oldData)=>{
-        this.addForm=<AddForm data={data} oldData={oldData}/>
+        this.addForm=<AddForm data={data} oldData={oldData} handleCancel={this.setOpenFalse}/>
         this.setState({dialogTitle: "Modificar empleado"});
-        this.setOpenTrue();
+        this.setState({openDialog: true});
     }
 
     setOpenTrue=()=>{
+        this.addForm=<AddForm handleCancel={this.setOpenFalse}/>
+        this.setState({dialogTitle: "Agregar empleado"});
         this.setState({openDialog: true});
     }
 
     setOpenFalse=()=>{
+        this.getData();
         this.setState({openDialog: false});
-        this.setState({dialogTitle: "Agregar empleado"});
-        console.log(employees)
-        this.setState({data: employees})
-        this.addForm=<AddForm/>
+        this.addForm=<AddForm handleCancel={this.setOpenFalse}/>
     }
 
     componentDidMount(){
-
+        this.getData();
     }
 
     render(){
@@ -62,7 +74,7 @@ class Employees extends Component{
             <div>
                 <Grid container>
                     <Grid item xs={12}>
-                        <Table columns={columns} data={data} dataEdit={this.openEditDialog}/>
+                        <Table columns={columns} data={data} dataEdit={this.openEditDialog} dataDelete={this.deleteEmployee}/>
                     </Grid>
                     <Dialog open={openDialog} handleCancel={this.setOpenFalse} content={this.addForm} title={dialogTitle} size={"lg"}/>
                 </Grid>

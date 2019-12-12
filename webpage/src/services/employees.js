@@ -1,5 +1,89 @@
-export const getEmployees=()=>{
-    //api fetch
+export const getEmployees =async function () {
+    try {
+        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees`,{
+            headers: {
+                'Content-Type': 'application/json',
+            }}
+        );
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        const json = await response.json();
+        console.log(json);
+
+        return json;
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
+export const createEmployee = async function (data) {
+    try {
+        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/add`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }else{
+            const json = await response.json();
+            return json;
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+}
+
+export const modifyEmployee = async function (data) {
+    console.log(data)
+    try {
+        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/edit`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }else{
+            const json = await response.json();
+            return json;
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+}
+
+export const deleteEmployee = async function (data) {
+    console.log(data)
+    try {
+        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/delete`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }else{
+            const json = await response.json();
+            return json;
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return []
+    }
 }
 
 export const employees=[
