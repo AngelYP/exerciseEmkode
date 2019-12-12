@@ -25,3 +25,4 @@ Iniciar con XAMPP o similar.
 MySQL.  
 Usuario: root.  
 Sin contraseña.  
+Nombre DB: exerciseemkode.  
