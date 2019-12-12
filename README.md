@@ -1,7 +1,20 @@
-# exerciseEmkode
-Ejercicio para Emkode
+# Ejercicio para Emkode
 
-Para iniciar la aplicación debe dirigrse a la carpeta webpage y ejecutar el comando yarn install/npm install
-Una vez terminada la instalación se debe ejecutar yarn start/npm start
-El servidor debe iniciarse con XAMPP/MAMPP/etc.
-Asegúrese de que en el archivo constants.js la url del servidor sea la correcta.
+## Frontend
+Colocarse en la carpeta "webpage".
+
+```bash
+yarn install
+yarn start
+```
+
+En caso de hacerlo con npm.
+
+```bash
+npm install
+npm start
+```
+
+Es importante asegurarse de que la constante del servidor es la correcta.
+Esta constante se encuentra en el archivo "constants.js" dentro de src.
+
