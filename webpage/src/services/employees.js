@@ -1,6 +1,8 @@
+import { SERVER_BASE_URL } from "./../constants";
+
 export const getEmployees =async function () {
     try {
-        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees`,{
+        const response = await fetch(`${SERVER_BASE_URL}`,{
             headers: {
                 'Content-Type': 'application/json',
             }}
@@ -20,7 +22,7 @@ export const getEmployees =async function () {
 
 export const createEmployee = async function (data) {
     try {
-        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/add`, {
+        const response = await fetch(`${SERVER_BASE_URL}/add`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -43,7 +45,7 @@ export const createEmployee = async function (data) {
 export const modifyEmployee = async function (data) {
     console.log(data)
     try {
-        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/edit`, {
+        const response = await fetch(`${SERVER_BASE_URL}/edit`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -66,7 +68,7 @@ export const modifyEmployee = async function (data) {
 export const deleteEmployee = async function (data) {
     console.log(data)
     try {
-        const response = await fetch(`http://localhost/exerciseEmkode/server/public/employees/delete`, {
+        const response = await fetch(`${SERVER_BASE_URL}/delete`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

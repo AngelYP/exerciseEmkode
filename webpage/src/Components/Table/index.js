@@ -1,5 +1,6 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+import {localization} from './../../constants';
 
 export default function Table({columns, data, dataEdit, dataDelete}){
     return(
@@ -8,6 +9,7 @@ export default function Table({columns, data, dataEdit, dataDelete}){
                 title="Empleados"
                 columns={columns}
                 data={data}
+                localization={localization}
                 actions={[
                     {
                         icon: 'edit',
@@ -21,7 +23,8 @@ export default function Table({columns, data, dataEdit, dataDelete}){
                     }
                 ]}    
                 options={{
-                    search: true
+                    search: true, 
+                    actionsColumnIndex: -1,
                 }}
             />
             

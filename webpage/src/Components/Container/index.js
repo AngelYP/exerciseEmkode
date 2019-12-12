@@ -1,6 +1,7 @@
 import React from 'react';
-import Home from './Home';
 import Employees from './Employees';
+import 'alertifyjs/build/css/alertify.min.css'
+import 'alertifyjs/build/css/themes/default.css'
 
 export default function Container(){
     return(

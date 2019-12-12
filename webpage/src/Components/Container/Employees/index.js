@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Table from '../../Table';
 import {employees, getEmployees, deleteEmployee} from './../../../services/employees'
 import AddForm from './AddForm';
 import Dialog from '../../Dialog';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
+import alertifyjs from "alertifyjs";
 
 const style = {
     margin: 0,
@@ -43,6 +44,7 @@ class Employees extends Component{
     deleteEmployee=(data)=>{
         deleteEmployee(data).then(()=>{
             this.getData();
+            alertifyjs.success("Empleado eliminado correctamente")
         }, (e) => console.error(e))
     }
 
@@ -74,7 +76,9 @@ class Employees extends Component{
             <div>
                 <Grid container>
                     <Grid item xs={12}>
+                        <br/>
                         <Table columns={columns} data={data} dataEdit={this.openEditDialog} dataDelete={this.deleteEmployee}/>
+                        <br/>
                     </Grid>
                     <Dialog open={openDialog} handleCancel={this.setOpenFalse} content={this.addForm} title={dialogTitle} size={"lg"}/>
                 </Grid>
