@@ -15,13 +15,13 @@ npm install
 npm start
 ```
 
-Es importante asegurarse de que la constante del servidor es la correcta.
+Es importante asegurarse de que la constante del servidor es la correcta.  
 Esta constante se encuentra en el archivo "constants.js" dentro de src.
 
 ## Backend
 Iniciar con XAMPP o similar.
 
 ## Database
-MySQL.
-Usuario: root.
-Sin contraseña.
+MySQL.  
+Usuario: root.  
+Sin contraseña.  
